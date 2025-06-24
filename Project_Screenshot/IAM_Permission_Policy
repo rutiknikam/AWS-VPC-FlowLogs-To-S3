@@ -1,0 +1,10 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": "s3:PutObject",
+			"Resource": "arn:aws:s3:::vpc-flow-logs-bucket-rutik/AWSLogs/692859945299/*"
+		}
+	]
+}

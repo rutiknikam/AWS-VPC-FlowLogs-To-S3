@@ -1,0 +1,54 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "1",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "vpc-flow-logs.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::vpc-flow-logs-bucket-rutik/AWSLogs/692859945299/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "692859945299"
+                }
+            }
+        },
+        {
+            "Sid": "AWSLogDeliveryWrite1",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "delivery.logs.amazonaws.com"
+            },
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::vpc-flow-logs-bucket-rutik/AWSLogs/692859945299/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "692859945299",
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                },
+                "ArnLike": {
+                    "aws:SourceArn": "arn:aws:logs:us-east-2:692859945299:*"
+                }
+            }
+        },
+        {
+            "Sid": "AWSLogDeliveryAclCheck1",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "delivery.logs.amazonaws.com"
+            },
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::vpc-flow-logs-bucket-rutik",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "692859945299"
+                },
+                "ArnLike": {
+                    "aws:SourceArn": "arn:aws:logs:us-east-2:692859945299:*"
+                }
+            }
+        }
+    ]
+}
